@@ -24,7 +24,7 @@ $num_rows_unpub = mysql_affected_rows($modxDBConn);
 <?php
 include_once "./processors/cache_sync.class.processor.php";
 $sync = new synccache();
-$sync->setCachepath("../assets/cache/");
+$sync->setCachepath($modx->config['base_path'] . "assets/cache/");
 $sync->setReport(true);
 $sync->emptyCache();
 

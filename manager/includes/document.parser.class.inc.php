@@ -408,7 +408,7 @@ class DocumentParser {
 
     function checkCache($id) {
         $cacheFile= "assets/cache/docid_" . $id . ".pageCache.php";
-        if (file_exists($cacheFile)) {
+        if (file_exists($this->config['base_path'] . $cacheFile)) {
             $this->documentGenerated= 0;
             $flContent = file_get_contents($cacheFile, false);
             $flContent= substr($flContent, 37); // remove php header
