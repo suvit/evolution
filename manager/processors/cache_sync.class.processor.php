@@ -9,6 +9,10 @@ class synccache{
     var $parents = array();
 
     function setCachepath($path) {
+        if ($path != realpath($path)) {
+           // relative path
+           $path = realpath(MODX_MANAGER_PATH . $path);   
+        }
         $this->cachePath = $path;
     }
 
