@@ -11,7 +11,7 @@ if (is_writable("includes/config.inc.php")){
     }
 }
 
-if (file_exists("../install/")) {
+if (file_exists($modx->config['base_path'] . "install/")) {
     $warningspresent = 1;
     $warnings[] = array($_lang['configcheck_installer']);
 }
@@ -112,7 +112,7 @@ if (!function_exists('checkSiteCache')) {
     }
 }
 
-if (!is_writable("../assets/cache/")) {
+if (!is_writable($modx->config['base_path'] . "assets/cache/")) {
     $warningspresent = 1;
     $warnings[] = array($_lang['configcheck_cache']);
 }
@@ -122,7 +122,7 @@ if (!checkSiteCache()) {
     $warnings[]= array($lang['configcheck_sitecache_integrity']);
 }
 
-if (!is_writable("../assets/images/")) {
+if (!is_writable($modx->config['base_path'] . "assets/images/")) {
     $warningspresent = 1;
     $warnings[] = array($_lang['configcheck_images']);
 }
