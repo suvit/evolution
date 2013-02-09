@@ -16,7 +16,7 @@ if(empty($base_path)||empty($base_url)||$_REQUEST['base_path']||$_REQUEST['base_
         array_pop($a);
     $url= implode("manager", $a);
     reset($a);
-    $a= explode("manager", str_replace("\\", "/", dirname(_SERVER["SCRIPT_FILENAME"])));
+    $a= explode("manager", str_replace("\\", "/", dirname($_SERVER["SCRIPT_FILENAME"])));
     if (count($a) > 1)
         array_pop($a);
     $pth= implode("manager", $a);
@@ -24,6 +24,7 @@ if(empty($base_path)||empty($base_url)||$_REQUEST['base_path']||$_REQUEST['base_
     $base_url= $url . (substr($url, -1) != "/" ? "/" : "");
     $base_path= $pth . (substr($pth, -1) != "/" && substr($pth, -1) != "\\" ? "/" : "");
 }
+
 if (IN_MANAGER_MODE)
   set_include_path(get_include_path() . PATH_SEPARATOR . $base_path);
 
