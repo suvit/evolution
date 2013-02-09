@@ -3,9 +3,6 @@
  * MODx Configuration file
  */
 
-// XXX remove DOCUMENT_ROOT
-require_once($_SERVER["DOCUMENT_ROOT"] . "/config/config.inc.php");
-
 // automatically assign base_path and base_url
 if(empty($base_path)||empty($base_url)||$_REQUEST['base_path']||$_REQUEST['base_url']) {
     $sapi= 'undefined';
@@ -19,7 +16,7 @@ if(empty($base_path)||empty($base_url)||$_REQUEST['base_path']||$_REQUEST['base_
         array_pop($a);
     $url= implode("manager", $a);
     reset($a);
-    $a= explode("manager", str_replace("\\", "/", dirname(__FILE__)));
+    $a= explode("manager", str_replace("\\", "/", dirname(_SERVER["SCRIPT_FILENAME"])));
     if (count($a) > 1)
         array_pop($a);
     $pth= implode("manager", $a);
@@ -27,8 +24,11 @@ if(empty($base_path)||empty($base_url)||$_REQUEST['base_path']||$_REQUEST['base_
     $base_url= $url . (substr($url, -1) != "/" ? "/" : "");
     $base_path= $pth . (substr($pth, -1) != "/" && substr($pth, -1) != "\\" ? "/" : "");
 }
-// XXX
-$base_path = $_SERVER["DOCUMENT_ROOT"];
+if (IN_MANAGER_MODE)
+  set_include_path(get_include_path() . PATH_SEPARATOR . $base_path);
+
+require_once("config/config.inc.php");
+
 // assign site_url
 $site_url= ((isset ($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == 'on') || $_SERVER['SERVER_PORT'] == $https_port) ? 'https://' : 'http://';
 $site_url .= $_SERVER['HTTP_HOST'];
