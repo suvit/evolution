@@ -9,7 +9,7 @@ class synccache{
     var $parents = array();
 
     function setCachepath($path) {
-        if ($path != realpath($path)) {
+        if ($path != realpath($path) && $path != realpath($path) . '/') {
            // relative path
            $path = realpath(MODX_BASE_PATH . 'assets/' . $path) . '/';
         }
